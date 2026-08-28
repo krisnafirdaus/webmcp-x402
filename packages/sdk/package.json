@@ -1,0 +1,18 @@
+{
+  "name": "webmcp-x402",
+  "version": "0.1.0",
+  "description": "Expose x402 (HTTP 402) paywalls as WebMCP tools with human-in-the-loop budgets",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "test": "vitest run"
+  },
+  "keywords": ["webmcp", "x402", "402", "micropayments", "mcp", "agents"],
+  "dependencies": { "viem": "^2.21.0" },
+  "devDependencies": { "tsup": "^8.0.0", "typescript": "^5.6.0", "vitest": "^2.1.0" }
+}
