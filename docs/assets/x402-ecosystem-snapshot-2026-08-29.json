@@ -1,0 +1,18 @@
+{
+  "source": "https://x402-list.com/api/v1/stats",
+  "accessedAt": "2026-08-29T13:13:51.180Z",
+  "license": "CC-BY-4.0",
+  "attribution": "Data: x402-list.com (CC BY 4.0)",
+  "stats": {
+    "totalServices": 575,
+    "totalEndpoints": 3532,
+    "paymentReadyServices": 522,
+    "newServices30d": 172,
+    "medianEndpointPriceUsd": 0.01
+  },
+  "limits": [
+    "This is an independent directory snapshot, not an official x402 ecosystem census.",
+    "A listed or payment-ready service is evidence of supply, not proof of customer adoption or publisher demand.",
+    "The project does not bundle or resell any listed service's content."
+  ]
+}

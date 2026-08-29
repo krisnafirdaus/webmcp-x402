@@ -4,7 +4,7 @@ This document separates what SpendMCP proves today from what still needs indepen
 
 ## Measured result
 
-Verified on 2026-08-28 with Google Chrome 152.0.7977.64 and Playwright 1.62.1:
+Verified on 2026-08-29 with Google Chrome 152.0.7977.64 and Playwright 1.62.1:
 
 | Claim | Executable evidence | Result |
 | --- | --- | --- |
@@ -13,8 +13,22 @@ Verified on 2026-08-28 with Google Chrome 152.0.7977.64 and Playwright 1.62.1:
 | Human authority is enforced | Separate scenarios cover over-cap refusal, explicit deny with zero spend, policy-raise approval, and purchase approval | Pass |
 | State survives ordinary navigation | Purchased access, receipts, and policy survive refresh | Pass |
 | Delivery accountability remains attached to payment | Receipt lookup and one-claim-per-payment issue reporting complete round trips | Pass |
-| Browser compatibility is current | All 13 end-to-end scenarios ran against installed Google Chrome 152 (newer than the Chrome 149 target) | 13/13 pass in 6.9 s |
+| Browser compatibility is current | All 14 end-to-end scenarios ran against installed Google Chrome 152 (newer than the Chrome 149 target) | 14/14 pass in 8.3 s |
 | Core and adversarial logic is pinned | SDK and workspace Vitest suites cover signatures, asset/network binding, quote expiry, races, rollback, bearer identifiers, and facilitator request shape | 131/131 pass |
+| Starting over creates a genuinely fresh capability session | The reset scenario buys access, observes tool 10, starts over, then asserts the resource is locked and only the nine static tools remain | Pass |
+
+## External market context — open evidence, not an adoption claim
+
+SpendMCP's runtime catalog remains synthetic. No third-party commercial dataset, response body, logo, or publisher content is bundled or resold.
+
+The surrounding problem is nevertheless externally observable:
+
+- Coinbase's official x402 documentation names pay-per-request APIs, paid digital content, and AI agents that autonomously pay for API access as first-class use cases: https://docs.cdp.coinbase.com/x402/welcome
+- An independent x402 directory snapshot from 2026-08-29 lists **575 services**, **3,532 endpoints**, **522 payment-ready services**, **172 new services in 30 days**, and a **$0.01 median endpoint price**: https://x402-list.com/api/v1/stats
+
+The exact snapshot used here is preserved at [`docs/assets/x402-ecosystem-snapshot-2026-08-29.json`](assets/x402-ecosystem-snapshot-2026-08-29.json). The directory data is CC BY 4.0 and attributed in `NOTICE`.
+
+This evidence establishes that machine-payable API supply exists at micropayment prices. It does **not** establish SpendMCP adoption, publisher willingness to integrate with SpendMCP, market size, or production savings. The directory is independent rather than an official ecosystem census, and payment-ready inventory is not the same as customer demand.
 
 ## Base Sepolia settlement proof
 
@@ -49,6 +63,6 @@ The default E2E command uses Playwright's bundled Chromium. Setting `E2E_CHANNEL
 
 ## Claim boundary
 
-These results prove implementation behavior, browser compatibility, and a publicly repeatable workflow. They do **not** yet prove publisher demand, time saved in production, willingness to pay, or usability across an independent participant cohort. Those require external participants; no such numbers should appear in the submission until the study has actually run.
+These results prove implementation behavior, browser compatibility, a publicly repeatable workflow, and the existence of a broader machine-payable API supply. They do **not** yet prove SpendMCP publisher demand, time saved in production, willingness to pay, or usability across an independent participant cohort. Those require external participants; no such numbers should appear in the submission until the study has actually run.
 
 A minimal external protocol is ready: give five participants only the live URL and the sample prompt, record task completion, time to first useful paid row, approval errors, and whether they can explain the budget boundary afterward. Publish the raw anonymized observations before converting them into a headline metric.

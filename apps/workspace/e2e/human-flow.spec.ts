@@ -152,6 +152,24 @@ test('state survives refresh', async ({ page }) => {
   expect(result.rows.length).toBeGreaterThan(0)
 })
 
+test('start over removes the purchased capability from the new session', async ({ page }) => {
+  await page.goto('/')
+
+  await page.getByTestId('buy-ev-batt-cells-daily').click()
+  await waitForDatasetTool(page)
+  await expect(page.getByTestId('tool-count')).toContainText('10 tools live')
+
+  await page.getByRole('button', { name: 'Start over' }).click()
+
+  await expect(page.getByTestId('state-ev-batt-cells-daily')).toContainText('Locked', { timeout: 10_000 })
+  await expect(page.getByTestId('tool-count')).toContainText('9 tools live')
+  await waitForTools(page)
+  const datasetToolPresent = await page.evaluate(
+    () => typeof (window as any).__spendmcpTools?.query_premium_dataset === 'function',
+  )
+  expect(datasetToolPresent).toBe(false)
+})
+
 test('preview modal shows sample rows and closes on Esc', async ({ page }) => {
   await page.goto('/')
 

@@ -31,7 +31,7 @@ pnpm install
 pnpm --filter webmcp-x402 build
 pnpm -r test                     # 131 unit tests
 pnpm --filter workspace dev      # http://localhost:3000
-pnpm --filter workspace e2e      # 13 Playwright tests (starts its own server on :3100)
+pnpm --filter workspace e2e      # 14 Playwright tests (starts its own server on :3100)
 E2E_CHANNEL=chrome E2E_PORT=3218 pnpm --filter workspace e2e  # installed Chrome 149+
 # If :3100 is occupied: E2E_PORT=3217 pnpm --filter workspace e2e
 ```

@@ -38,11 +38,11 @@ Screen recording + voiceover, 1080p, no music. Primary take: ChatGPT desktop wit
 
 **VO:** "And when the agent reaches past my limits, the system refuses — and asking for more authority lands on my screen, not in its own hands. I say no; nothing moves. Retries replay the same payment instead of charging twice."
 
-## 2:45–3:00 — Close
+## 2:45–3:00 — Market evidence + close
 
-**Screen:** One architecture slide — five boxes: Reasoning agent → Policy engine → Deterministic signer → Receipt verifier → Audit ledger. Then end card: spendmcp-x402.vercel.app + github.com/krisnafirdaus/webmcp-x402.
+**Screen:** One restrained evidence slide: "575 services · 3,532 endpoints · 522 payment-ready" with "Independent x402-list snapshot, CC BY 4.0, 2026-08-29 — supply evidence, not SpendMCP adoption" in the footer. Then the five-box authority boundary and end card: spendmcp-x402.vercel.app + github.com/krisnafirdaus/webmcp-x402.
 
-**VO:** "WebMCP makes the paid web agent-accessible. x402 makes access programmable. Humans keep economic control. SpendMCP — links below."
+**VO:** "Hundreds of machine-payable services already exist. SpendMCP adds the missing human-controlled purchasing layer. WebMCP makes the paid web agent-accessible. x402 makes access programmable. Humans keep economic control."
 
 ## Checklist
 
@@ -52,4 +52,5 @@ Screen recording + voiceover, 1080p, no music. Primary take: ChatGPT desktop wit
 - [ ] Policy numbers legible at 1080p; mode badge visible in payment cut
 - [ ] `registerTool` code on screen ≥2s
 - [ ] Architecture slide 5 boxes; closing line verbatim
+- [ ] Market figures include the source, date, licence, and "not adoption" qualifier
 - [ ] No copyrighted assets; end card with both URLs

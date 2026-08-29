@@ -85,8 +85,8 @@ The WebMCP Challenge rules use four equally weighted criteria. WebMCP Leverage i
 | Criterion | SpendMCP evidence | Remaining risk |
 |---|---|---|
 | **WebMCP Leverage** | Nine useful tools share live page/session state; a verified purchase dynamically registers `query_premium_dataset`; the on-page panel visibly changes 9 → 10. | Must still be shown clearly in the final video and verified in both supported judge hosts. |
-| **Execution** | Zero-setup live app; agent and human paths; policy, approval, ledger, delivery-bound receipts; 131 unit + 12 E2E tests. | Final public video is intentionally left to the submission owner. |
-| **Potential Impact** | Solves a specific paid-research failure: agents can evaluate and buy low-cost data while the person retains economic control. | No independent publisher integration or user-time/cost study yet; do not imply adoption. |
+| **Execution** | Zero-setup live app; agent and human paths; policy, approval, ledger, delivery-bound receipts; 131 unit + 14 E2E tests. | Final public video is intentionally left to the submission owner. |
+| **Potential Impact** | Solves a specific paid-research failure; official x402 use cases plus an attributed open-directory snapshot establish that machine-payable API supply exists at micropayment prices. | No SpendMCP publisher integration or user-time/cost study yet; evidence must remain market context, not an adoption claim. |
 | **Creativity & Ambition** | Combines browser-native tool discovery, delegated micropayment, visible authority boundaries, and payment-driven capability registration. | Agent payments are an emerging category; novelty must be demonstrated through the capability lifecycle, not claimed from x402 alone. |
 
 Source of truth: the current Devpost Official Rules. If the OpenAI landing page, a plugin, or this repository conflicts with those rules, follow the Official Rules.

@@ -22,6 +22,8 @@ Agents can research, compare, and recommend—but at a paywall they usually stop
 
 Publishers face the other side of the same gap. Their paid resources are invisible to tool-using agents, so useful agent traffic reaches a dead end instead of becoming an auditable purchase.
 
+This is an emerging supply problem, not a claimed user-adoption result. Coinbase documents paid APIs and agent-initiated access as first-class x402 use cases, while an independently maintained, CC BY 4.0 directory snapshot from 2026-08-29 lists 575 services, 3,532 endpoints, and 522 payment-ready services. See the [bounded market-context evidence](docs/05-IMPACT-EVIDENCE.md#external-market-context--open-evidence-not-an-adoption-claim) for sources, the preserved snapshot, and its limitations.
+
 ## The solution
 
 SpendMCP turns paid resources into browser-native, policy-bound capabilities:
@@ -105,7 +107,7 @@ The complete threat model also states the residual risks: bearer payment identif
 
 ## Evaluation
 
-Verified locally on **2026-08-28**. The repository contains **144 passing automated tests**: 48 SDK tests, 83 workspace unit/integration tests, and 13 Playwright end-to-end scenarios.
+Verified locally on **2026-08-29**. The repository contains **145 passing automated tests**: 48 SDK tests, 83 workspace unit/integration tests, and 14 Playwright end-to-end scenarios.
 
 | Scenario | Expected result | Actual result |
 | --- | --- | --- |
@@ -115,6 +117,7 @@ Verified locally on **2026-08-28**. The repository contains **144 passing automa
 | Verified purchase completes | Capability surface changes from 9 to 10 tools | Pass — E2E |
 | Same payment identifier is retried | Return original receipt without spending twice | Pass — E2E + unit |
 | Page reloads after purchase | Policy, ledger, grant, and dynamic tool survive | Pass — E2E |
+| User starts over after purchase | A fresh wallet/session returns to nine static tools; the premium tool is removed with the old document | Pass — E2E |
 | Cross-chain or cross-token authorization is submitted | Reject before settlement | Pass — unit |
 | Two requests race to consume one quote or budget | At most one succeeds; budget cannot overspend | Pass — unit |
 | Settlement adapter fails | Roll back reservation and issue no grant | Pass — unit |
@@ -166,7 +169,7 @@ Real mode uses Base Sepolia test USDC only. It requires `MOCK_MODE=0`, `NEXT_PUB
 ```bash
 pnpm --filter webmcp-x402 build
 pnpm -r test                                      # 131 SDK + workspace tests
-E2E_PORT=3217 pnpm --filter workspace e2e         # 13 bundled-Chromium scenarios
+E2E_PORT=3217 pnpm --filter workspace e2e         # 14 bundled-Chromium scenarios
 E2E_CHANNEL=chrome E2E_PORT=3218 \
   pnpm --filter workspace e2e                     # same scenarios in installed Chrome
 ```
@@ -204,6 +207,7 @@ docs/assets/                 submission visuals
 - Delivery claims are merchant-resolved status records, not automatic refunds. Core x402 has no universal refund primitive.
 - Tools register at page load. If a host injects WebMCP after load, the page needs a refresh.
 - All datasets are synthetic-but-plausible. The demo proves commerce mechanics, not the accuracy of a commercial data product.
+- No third-party commercial dataset is bundled or resold. External ecosystem statistics appear only as attributed CC BY 4.0 context in the evidence document.
 
 ## Submission and provenance
 

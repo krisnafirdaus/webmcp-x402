@@ -16,6 +16,8 @@ Research agents can discover valuable information but still fail at the moment o
 
 SpendMCP turns that dead end into delegated purchasing. The agent decides which source is worth buying; the person defines the economic authority.
 
+The surrounding supply already exists: Coinbase documents pay-per-request APIs and agent-paid access as x402 use cases, and an independent CC BY 4.0 directory snapshot from 2026-08-29 lists 575 services, 3,532 endpoints, and 522 payment-ready services. These figures validate machine-payable supply, not SpendMCP adoption; the reproducible snapshot and caveats are published in `docs/05-IMPACT-EVIDENCE.md`.
+
 ### Why this is a strong fit for WebMCP
 
 The important state already lives on the page: available sources, free previews, the person's spending policy, approval requests, unlocked resources, and the receipt ledger. WebMCP lets the person and agent work against that same live state and session through typed tools instead of screen-scraping.
@@ -46,8 +48,10 @@ Authority is separated across five parts: reasoning agent, policy engine, determ
 
 ### Evidence
 
-- 131 unit tests and 13 Playwright end-to-end tests pass.
+- 131 unit tests and 14 Playwright end-to-end tests pass.
 - The E2E suite proves the full research flow, dynamic 9 → 10 tool registration, both agent- and human-initiated purchases, approval and denial, replay without re-spend, receipt lookup, delivery claims, refresh persistence, and structured rejection of invalid tool input.
+- A reset regression proves that starting over returns the browser to the nine-tool baseline instead of leaving a stale premium capability registered.
+- External market context is limited to cited open evidence; the runtime uses synthetic datasets and makes no publisher-adoption claim.
 - The production build compiles cleanly, and the live demo works without signup or funds.
 - The repository is public under Apache-2.0 and includes architecture, threat-model, security, judge, and local-run documentation.
 

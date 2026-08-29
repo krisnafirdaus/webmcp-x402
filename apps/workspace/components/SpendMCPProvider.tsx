@@ -558,6 +558,13 @@ export function SpendMCPProvider({ children }: { children: ReactNode }) {
     policyRef.current = createPolicy()
     setPolicyVersion((v) => v + 1)
     setAccount(resetDemoAccount())
+
+    // WebMCP exposes registration but no portable unregister operation. A
+    // same-document reset would therefore leave query_premium_dataset in the
+    // host even though the new session has no purchase. Reloading after the
+    // synchronous storage reset gives the host a fresh document and restores
+    // the intended nine-tool baseline.
+    window.location.reload()
   }, [])
 
   const value = useMemo<SpendMCPContextValue>(
