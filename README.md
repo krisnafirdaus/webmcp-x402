@@ -2,7 +2,7 @@
 
 **WebMCP Challenge 2026 entry.** SpendMCP lets an AI agent discover and purchase paid web capabilities within limits set by a human, using WebMCP tools and x402 USDC payments.
 
-[Live demo](https://spendmcp-x402.vercel.app) · [Demo video](https://youtu.be/wgjWTSeXIKM) · [60-second judge guide](docs/judge-guide.md) · [Architecture](docs/01-ARCHITECTURE.md) · [Reproducible evidence](docs/05-IMPACT-EVIDENCE.md)
+[Live demo](https://spendmcp-x402.vercel.app) · [Demo video](https://youtu.be/wgjWTSeXIKM) · [60-second judge guide](docs/judge-guide.md) · [Architecture](docs/01-ARCHITECTURE.md) · [Reproducible evidence](docs/05-IMPACT-EVIDENCE.md) · [External validation study](docs/06-EXTERNAL-VALIDATION.md) · [Study privacy notice](docs/07-VALIDATION-PRIVACY.md)
 
 ![SpendMCP after a verified payment: the premium dataset is unlocked, the capability surface shows 10 live tools, the session budget is updated, and a receipt appears in the ledger.](docs/assets/spendmcp-workspace.png)
 

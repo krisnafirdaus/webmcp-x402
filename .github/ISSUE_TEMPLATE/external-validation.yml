@@ -1,0 +1,87 @@
+name: SpendMCP external validation
+description: Share the result of the three-minute independent usability study.
+title: "[validation]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for independently testing SpendMCP. Run the live demo before completing this form.
+
+        **Privacy summary:** This issue, your GitHub username, its timestamp, and your answers will be public. Krisna Firdaus (`@krisnafirdaus`) uses them only for WebMCP Challenge usability evidence. Raw issues will be deleted after September 30, 2026; non-identifying aggregate results may remain. You may withdraw before then by commenting `withdraw consent` or contacting `@krisnafirdaus`. Read the [full privacy notice](https://github.com/krisnafirdaus/webmcp-x402/blob/main/docs/07-VALIDATION-PRIVACY.md).
+
+        Do not include wallet keys, addresses, contact details, or other sensitive information. This feedback is designated **Not a Contribution** under the repository's Apache-2.0 license.
+
+  - type: dropdown
+    id: completed_task
+    attributes:
+      label: Did you complete the paid research task?
+      description: Completion means purchasing the $0.04 source and receiving premium dataset rows.
+      options:
+        - Yes
+        - Partly
+        - No
+    validations:
+      required: true
+
+  - type: input
+    id: elapsed_time
+    attributes:
+      label: Approximate completion time
+      description: From opening the workspace to receiving the first useful premium row.
+      placeholder: e.g. 2 minutes 40 seconds
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tool_transition
+    attributes:
+      label: Did you notice the capability surface change from 9 to 10 tools?
+      options:
+        - Yes
+        - No
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: over_cap
+    attributes:
+      label: What happened when you tried the $0.12 source under the default $0.05 cap?
+      options:
+        - It was blocked before payment
+        - It requested a human policy decision
+        - Something unexpected happened
+        - I did not try this step
+    validations:
+      required: true
+
+  - type: textarea
+    id: authority_boundary
+    attributes:
+      label: In your own words, who chooses the source and who controls the spending limit?
+      description: A short sentence is enough. This tests whether the authority boundary is understandable.
+      placeholder: The agent..., while the human...
+    validations:
+      required: true
+
+  - type: textarea
+    id: feedback
+    attributes:
+      label: What was clearest, and what was most confusing?
+      placeholder: Clearest... Most confusing...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Participation and public evidence consent
+      options:
+        - label: I confirm that I am at least 18 years old.
+          required: true
+        - label: I have read the privacy summary and consent to this public response being used in aggregate WebMCP Challenge metrics.
+          required: true
+        - label: I separately permit short quotations from this response to be used without my username.
+          required: false
+        - label: I confirm that I did not include private keys, wallet data, contact details, or other sensitive information in my answers.
+          required: true

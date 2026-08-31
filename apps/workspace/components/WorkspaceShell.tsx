@@ -13,6 +13,9 @@ const SAMPLE_PROMPT =
 
 const FEATURED_RESOURCE_ID = 'ev-batt-cells-daily'
 
+const EXTERNAL_VALIDATION_URL =
+  'https://github.com/krisnafirdaus/webmcp-x402/issues/new?template=external-validation.yml'
+
 function SourceCardSkeleton({ featured = false }: { featured?: boolean }) {
   return (
     <div
@@ -170,8 +173,17 @@ export function WorkspaceShell() {
         <Ledger />
       </div>
 
-      <footer className="border-t border-zinc-200 pt-6 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
-        Open source (Apache-2.0) · x402 + WebMCP · testnet only — no real funds
+      <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-zinc-200 pt-6 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
+        <span>Open source (Apache-2.0) · x402 + WebMCP · testnet only — no real funds</span>
+        <a
+          data-testid="external-validation-link"
+          href={EXTERNAL_VALIDATION_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 transition-colors hover:text-zinc-950 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-white"
+        >
+          Independent tester? Share a 3-minute result
+        </a>
       </footer>
 
       <ApprovalSheet />

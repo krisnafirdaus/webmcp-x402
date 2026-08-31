@@ -8,6 +8,10 @@ test('badges and sample prompt', async ({ page }) => {
   await expect(page.getByTestId('webmcp-badge')).toContainText('Manual browser mode')
   await expect(page.getByTestId('sample-prompt')).toBeVisible()
   await expect(page.getByTestId('sample-prompt')).toContainText('Compare EV battery pack price trends')
+  await expect(page.getByTestId('external-validation-link')).toHaveAttribute(
+    'href',
+    'https://github.com/krisnafirdaus/webmcp-x402/issues/new?template=external-validation.yml',
+  )
 })
 
 test('judge-width layout leads with the recommended source and policy', async ({ page }) => {
