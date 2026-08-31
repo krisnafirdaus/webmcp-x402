@@ -214,7 +214,7 @@ docs/assets/                 submission visuals
 
 The SDK, workspace, tests, and documentation in this repository form the WebMCP Challenge 2026 entry. The real settlement shown in the evidence document used Base Sepolia test assets with no monetary value. Third-party attribution is recorded in [NOTICE](NOTICE).
 
-An immutable submission tag has not been cut yet; `main` is the current working submission. At the deadline, the reviewed commit should be tagged so later development cannot be confused with the judged snapshot.
+The immutable tag `webmcp-challenge-2026-submission` marks the reviewed submission snapshot so later development cannot be confused with the judged build.
 
 ## Documentation
 
