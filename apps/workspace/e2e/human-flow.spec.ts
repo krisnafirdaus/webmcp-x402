@@ -152,6 +152,45 @@ test('state survives refresh', async ({ page }) => {
   expect(result.rows.length).toBeGreaterThan(0)
 })
 
+test('stale browser grant is cleared before the dynamic tool registers', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.localStorage.setItem(
+      'spendmcp.session.v1',
+      JSON.stringify({
+        purchasedIds: ['ev-batt-cells-daily'],
+        serverPaymentIds: [['ev-batt-cells-daily', 'pay_stale00000000']],
+        receipts: [
+          {
+            amountUsd: 0.04,
+            resource: 'ev-batt-cells-daily',
+            nonce: '0xstale',
+            network: 'base-sepolia',
+            mode: 'mock',
+            at: '2026-08-29T00:00:00.000Z',
+          },
+        ],
+        policy: {
+          perTxCapUsd: 0.05,
+          sessionCapUsd: 0.2,
+          spentUsd: 0.04,
+          autoApproveUnderUsd: 0.05,
+        },
+      }),
+    )
+  })
+
+  await page.goto('/')
+  await waitForTools(page)
+
+  await expect(page.getByTestId('state-ev-batt-cells-daily')).toContainText('Locked')
+  await expect(page.getByTestId('tool-count')).toContainText('9 tools live')
+  await expect(page.getByTestId('ledger')).toContainText('0 verified payments this session')
+  const datasetToolPresent = await page.evaluate(
+    () => typeof (window as any).__spendmcpTools?.query_premium_dataset === 'function',
+  )
+  expect(datasetToolPresent).toBe(false)
+})
+
 test('start over removes the purchased capability from the new session', async ({ page }) => {
   await page.goto('/')
 

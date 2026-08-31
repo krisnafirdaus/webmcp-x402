@@ -4,7 +4,7 @@ This document separates what SpendMCP proves today from what still needs indepen
 
 ## Measured result
 
-Verified on 2026-08-29 with Google Chrome 152.0.7977.64 and Playwright 1.62.1:
+Verified on 2026-08-31 with Google Chrome 152.0.7977.64 and Playwright 1.62.1:
 
 | Claim | Executable evidence | Result |
 | --- | --- | --- |
@@ -12,8 +12,9 @@ Verified on 2026-08-29 with Google Chrome 152.0.7977.64 and Playwright 1.62.1:
 | A retry does not spend twice | The replay scenario reuses the same payment identifier, returns the original receipt, and leaves session spend unchanged | Pass |
 | Human authority is enforced | Separate scenarios cover over-cap refusal, explicit deny with zero spend, policy-raise approval, and purchase approval | Pass |
 | State survives ordinary navigation | Purchased access, receipts, and policy survive refresh | Pass |
+| A browser cache cannot outlive the authoritative grant | A stale saved payment is rejected during restore; the app clears spend, receipts, and the premium tool before WebMCP registration | Pass |
 | Delivery accountability remains attached to payment | Receipt lookup and one-claim-per-payment issue reporting complete round trips | Pass |
-| Browser compatibility is current | All 14 end-to-end scenarios ran against installed Google Chrome 152 (newer than the Chrome 149 target) | 14/14 pass in 8.3 s |
+| Browser compatibility is current | All 15 end-to-end scenarios ran against installed Google Chrome 152 (newer than the Chrome 149 target) | 15/15 pass in 11.4 s |
 | Core and adversarial logic is pinned | SDK and workspace Vitest suites cover signatures, asset/network binding, quote expiry, races, rollback, bearer identifiers, and facilitator request shape | 131/131 pass |
 | Starting over creates a genuinely fresh capability session | The reset scenario buys access, observes tool 10, starts over, then asserts the resource is locked and only the nine static tools remain | Pass |
 

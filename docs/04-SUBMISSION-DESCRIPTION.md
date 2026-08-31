@@ -48,8 +48,9 @@ Authority is separated across five parts: reasoning agent, policy engine, determ
 
 ### Evidence
 
-- 131 unit tests and 14 Playwright end-to-end tests pass.
+- 131 unit tests and 15 Playwright end-to-end tests pass.
 - The E2E suite proves the full research flow, dynamic 9 → 10 tool registration, both agent- and human-initiated purchases, approval and denial, replay without re-spend, receipt lookup, delivery claims, refresh persistence, and structured rejection of invalid tool input.
+- A stale-session regression proves that a browser cache cannot restore the premium tool after the server's authoritative demo grant is gone.
 - A reset regression proves that starting over returns the browser to the nine-tool baseline instead of leaving a stale premium capability registered.
 - External market context is limited to cited open evidence; the runtime uses synthetic datasets and makes no publisher-adoption claim.
 - The production build compiles cleanly, and the live demo works without signup or funds.

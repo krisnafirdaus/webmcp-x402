@@ -9,7 +9,7 @@ Source: https://webmcp.devpost.com/rules + https://openai.com/webmcp-challenge/ 
 
 ## Required artifacts
 
-- [x] **Live app URL** — https://spendmcp-x402.vercel.app (Vercel, sponsor-listed host; SSO protection disabled — verified public 200, WebMCP tool discovery, simulated purchase, capability transition from 9 to 10 tools, and premium query in ChatGPT's in-app browser). The 14-scenario suite passed in both bundled Chromium and Google Chrome 152, newer than the Chrome 149 target.
+- [x] **Live app URL** — https://spendmcp-x402.vercel.app (Vercel, sponsor-listed host; SSO protection disabled — verified public 200, WebMCP tool discovery, simulated purchase, capability transition from 9 to 10 tools, and premium query in ChatGPT's in-app browser). The 15-scenario suite passed in both bundled Chromium and Google Chrome 152, newer than the Chrome 149 target.
 - [x] **Public repo** — https://github.com/krisnafirdaus/webmcp-x402 (Apache-2.0 is visible in GitHub's repository navigation; NOTICE, a challenge-period root commit dated 2026-08-28, and setup instructions are present)
 - [x] No obvious secrets/private keys in the current tracked tree or single-commit public history; only `.env.example` is tracked. Run a dedicated scanner before final submission if available.
 - [x] Repo contains the `modelContext.registerTool()` implementation through `getModelContext()` + `createToolRegistrar()` (`packages/sdk/src/webmcp.ts`)
@@ -20,7 +20,7 @@ Source: https://webmcp.devpost.com/rules + https://openai.com/webmcp-challenge/ 
 ## Eligibility / process
 
 - [ ] This is my only entry, or any additional entries are unique and substantially different
-- [ ] Original work started for the challenge (current public history is one root commit dated Aug 28, 2026; retain equivalent development evidence because the earlier granular history was intentionally squashed)
+- [ ] Original work started for the challenge (public history begins with the root commit dated Aug 28, 2026 and retains dated follow-up commits; keep equivalent development evidence because the earlier granular history was intentionally squashed)
 - [ ] No prior sponsor financial support for this project
 - [ ] Country eligible for OpenAI API access
 

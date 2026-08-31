@@ -107,7 +107,7 @@ The complete threat model also states the residual risks: bearer payment identif
 
 ## Evaluation
 
-Verified locally on **2026-08-29**. The repository contains **145 passing automated tests**: 48 SDK tests, 83 workspace unit/integration tests, and 14 Playwright end-to-end scenarios.
+Verified locally on **2026-08-31**. The repository contains **146 passing automated tests**: 48 SDK tests, 83 workspace unit/integration tests, and 15 Playwright end-to-end scenarios.
 
 | Scenario | Expected result | Actual result |
 | --- | --- | --- |
@@ -117,6 +117,7 @@ Verified locally on **2026-08-29**. The repository contains **145 passing automa
 | Verified purchase completes | Capability surface changes from 9 to 10 tools | Pass — E2E |
 | Same payment identifier is retried | Return original receipt without spending twice | Pass — E2E + unit |
 | Page reloads after purchase | Policy, ledger, grant, and dynamic tool survive | Pass — E2E |
+| Browser restores a grant the server no longer recognizes | Clear cached purchase before the dynamic tool registers | Pass — E2E |
 | User starts over after purchase | A fresh wallet/session returns to nine static tools; the premium tool is removed with the old document | Pass — E2E |
 | Cross-chain or cross-token authorization is submitted | Reject before settlement | Pass — unit |
 | Two requests race to consume one quote or budget | At most one succeeds; budget cannot overspend | Pass — unit |
@@ -169,7 +170,7 @@ Real mode uses Base Sepolia test USDC only. It requires `MOCK_MODE=0`, `NEXT_PUB
 ```bash
 pnpm --filter webmcp-x402 build
 pnpm -r test                                      # 131 SDK + workspace tests
-E2E_PORT=3217 pnpm --filter workspace e2e         # 14 bundled-Chromium scenarios
+E2E_PORT=3217 pnpm --filter workspace e2e         # 15 bundled-Chromium scenarios
 E2E_CHANNEL=chrome E2E_PORT=3218 \
   pnpm --filter workspace e2e                     # same scenarios in installed Chrome
 ```
@@ -201,7 +202,7 @@ docs/assets/                 submission visuals
 
 ## Honest limitations
 
-- Quotes, payments, nonces, claims, and the IP guard live in memory per server instance. A production deployment needs durable storage with unique constraints and transactional consumption.
+- Quotes, payments, nonces, claims, and the IP guard live in memory per server instance. Restored browser grants are validated on load and discarded if their authoritative receipt is gone, but a production deployment still needs durable storage with unique constraints and transactional consumption.
 - Payment and resource identifiers are bearer capabilities. They are unguessable, but a leaked identifier grants access to this synthetic demo data.
 - The browser wallet is deliberately frictionless and testnet-only. A production wallet must use stronger custody and session binding.
 - Delivery claims are merchant-resolved status records, not automatic refunds. Core x402 has no universal refund primitive.

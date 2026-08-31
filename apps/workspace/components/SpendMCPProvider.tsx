@@ -139,6 +139,12 @@ export function SpendMCPProvider({ children }: { children: ReactNode }) {
   // hydration mismatch risk on refresh, accepted deliberately here — see the
   // e2e run notes for whether it needed a mounted-flag gate in practice).
   const [initialSession] = useState<SessionSnapshot | null>(() => loadSession())
+  // A browser snapshot is only a cache. The authoritative payment grant lives
+  // on the server, so restored purchases must be revalidated before WebMCP
+  // exposes the dynamic dataset tool again.
+  const [restoredSessionReady, setRestoredSessionReady] = useState(
+    () => !initialSession || initialSession.purchasedIds.length === 0,
+  )
 
   const policyRef = useRef<Policy | undefined>(undefined)
   // spentUsd can only be set at Budget construction (no setter exists), so a
@@ -420,6 +426,52 @@ export function SpendMCPProvider({ children }: { children: ReactNode }) {
   // resourceId -> paymentId mapping from the snapshot.
   const [serverPaymentIdVersion, setServerPaymentIdVersion] = useState(0)
 
+  useEffect(() => {
+    if (restoredSessionReady || !initialSession) return
+
+    let cancelled = false
+    const paymentIds = new Map(initialSession.serverPaymentIds)
+
+    void Promise.all(
+      initialSession.purchasedIds.map(async (resourceId) => {
+        const paymentId = paymentIds.get(resourceId)
+        if (!paymentId) return false
+        try {
+          const res = await fetch(`/api/receipt/${encodeURIComponent(paymentId)}`)
+          if (!res.ok) return false
+          const body = await res.json().catch(() => null)
+          return body?.receipt?.paymentId === paymentId && body?.receipt?.resourceId === resourceId
+        } catch {
+          return false
+        }
+      }),
+    ).then((results) => {
+      if (cancelled) return
+
+      if (!results.every(Boolean)) {
+        // Serverless instances may lose their in-memory demo grants while the
+        // browser cache survives. Never advertise a capability the server no
+        // longer honors; fall back to a clean, zero-spend session instead.
+        clearSession()
+        quoteCache.current.clear()
+        purchasedIdsRef.current = []
+        setPurchasedIds([])
+        receiptsRef.current = []
+        setReceipts([])
+        serverPaymentIdRef.current = new Map()
+        setServerPaymentIdVersion((v) => v + 1)
+        policyRef.current = createPolicy()
+        setPolicyVersion((v) => v + 1)
+      }
+
+      setRestoredSessionReady(true)
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [initialSession, restoredSessionReady])
+
   const registrarRef = useRef<ToolRegistrar | null>(null)
   const depsRef = useRef<ToolDeps | undefined>(undefined)
 
@@ -493,6 +545,7 @@ export function SpendMCPProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (registeredRef.current) return
+    if (!restoredSessionReady) return
     if (!account || !paidFetch) return
     registeredRef.current = true
 
@@ -516,7 +569,7 @@ export function SpendMCPProvider({ children }: { children: ReactNode }) {
     if (purchasedIdsRef.current.length > 0) {
       registerDatasetTool()
     }
-  }, [account, paidFetch, registerDatasetTool])
+  }, [account, paidFetch, registerDatasetTool, restoredSessionReady])
   // --- end Task 11 ------------------------------------------------------
 
   // Persist purchases/receipts/policy/server-payment-ids to localStorage on
