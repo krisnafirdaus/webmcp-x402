@@ -74,3 +74,4 @@ WebMCP, x402, EIP-3009, USDC on Base Sepolia, TypeScript, Next.js 16, React 19, 
 
 - Live demo: https://spendmcp-x402.vercel.app
 - Source: https://github.com/krisnafirdaus/webmcp-x402
+- Demo video: https://youtu.be/wgjWTSeXIKM

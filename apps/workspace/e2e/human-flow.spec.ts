@@ -189,6 +189,14 @@ test('stale browser grant is cleared before the dynamic tool registers', async (
     () => typeof (window as any).__spendmcpTools?.query_premium_dataset === 'function',
   )
   expect(datasetToolPresent).toBe(false)
+
+  // The stale snapshot's policy object was replaced above. A subsequent
+  // payment must charge the new live budget, not the discarded old one.
+  const purchase = await tool(page, 'purchase_access', { resourceId: 'ev-batt-cells-daily' })
+  expect(purchase.ok).toBe(true)
+  const policy = await tool(page, 'get_spending_policy')
+  expect(policy.policy.spentUsd).toBeCloseTo(0.04)
+  await expect(page.getByText('$0.04 spent')).toBeVisible()
 })
 
 test('start over removes the purchased capability from the new session', async ({ page }) => {

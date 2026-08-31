@@ -151,6 +151,9 @@ export function SpendMCPProvider({ children }: { children: ReactNode }) {
   // restored session must flow in here, not via humanSet/agentSet afterward.
   if (!policyRef.current) policyRef.current = createPolicy(initialSession?.policy)
   const [policyVersion, setPolicyVersion] = useState(0)
+  // Changes only when policyRef itself is replaced. paidFetch must follow the
+  // replacement or it will keep recording spend against the discarded budget.
+  const [policyInstanceVersion, setPolicyInstanceVersion] = useState(0)
   const bumpPolicy = useCallback(() => setPolicyVersion((v) => v + 1), [])
 
   const [receipts, setReceipts] = useState<PaymentReceipt[]>(() => initialSession?.receipts ?? [])
@@ -270,7 +273,7 @@ export function SpendMCPProvider({ children }: { children: ReactNode }) {
         bumpPolicy()
       },
     })
-  }, [account, confirm, appendReceipt, bumpPolicy])
+  }, [account, confirm, appendReceipt, bumpPolicy, policyInstanceVersion])
 
   const getQuote = useCallback(async (resourceId: string): Promise<QuoteResult> => {
     try {
@@ -461,6 +464,7 @@ export function SpendMCPProvider({ children }: { children: ReactNode }) {
         serverPaymentIdRef.current = new Map()
         setServerPaymentIdVersion((v) => v + 1)
         policyRef.current = createPolicy()
+        setPolicyInstanceVersion((v) => v + 1)
         setPolicyVersion((v) => v + 1)
       }
 
@@ -609,6 +613,7 @@ export function SpendMCPProvider({ children }: { children: ReactNode }) {
     serverPaymentIdRef.current = new Map()
     setServerPaymentIdVersion((v) => v + 1)
     policyRef.current = createPolicy()
+    setPolicyInstanceVersion((v) => v + 1)
     setPolicyVersion((v) => v + 1)
     setAccount(resetDemoAccount())
 
